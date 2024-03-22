@@ -1,0 +1,45 @@
+*{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.main{
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    border: 2px solid gray;
+    margin-top: 20px;
+    padding: 1.2rem;
+    gap: 2rem;
+    margin: 0 auto;
+}
+.main input{
+    padding: 0.7rem;
+}
+.main button{
+    padding: 0.7rem;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    border: none;
+}
+.main button:hover{
+    background-color: white;
+    border: 2px solid black;
+    color: black;
+}
+.imgContainer{
+    width: 50px;
+}
+.imgContainer img{
+    width: 100%;
+}
+.top{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+a{
+    color: black;
+}

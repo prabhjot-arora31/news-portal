@@ -1,0 +1,88 @@
+*{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.imgContainer{
+    width: 50px;
+}
+.imgContainer img{
+    width: 100%;
+}
+.top{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+}
+.home-btn{
+    padding: 0.7rem;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    border: none;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    width: 250px;
+}
+.main{
+    width: 580px;
+    border: 2px solid black;
+    margin: 0 auto;
+    height: 470px;
+    padding: 0.7rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    overflow-y: scroll;
+    border-left: 0;
+    border-right: 0;
+}
+.main2{
+    width: 580px;
+    border: 2px solid black;
+    margin: 0 auto;
+    /* height: 450px; */
+    padding: 0.7rem;
+    /* margin-left: 0;
+    margin-right: 0; */
+}
+.main2 .inner{
+    margin: 0 auto;
+    border:  2px solid black;
+    padding: 0.55rem;
+    display: flex;
+    gap: 0.65rem;
+    flex-direction: column;
+    align-items: center;
+}
+.main2 .inner input{
+    padding: 0.4rem;
+}
+select{
+    padding: 0.6rem;
+    cursor: pointer;
+}
+.tabs{
+    /* height: 35px; */
+    width: 100%;
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    /* margin-bottom: 60px; */
+}
+.tabs h3{
+    cursor: pointer;
+    padding: 0.55rem;
+}
+.big-main{
+    border: 2px solid black;
+    width: 605px;
+    margin: 0 auto;
+}
+.tabs h3:hover{
+    /* border: 2px solid black; */
+    background-color: lightgray;
+}
