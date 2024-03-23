@@ -169,7 +169,13 @@ app.get(
     }
   }
 );
-app.post("/home/news-by-date", async (req, res) => {
+app.post("/home/news-by-date",  (req, res, next) => {
+    if (req.session && req.session.user) {
+      next();
+    } else {
+      res.render(path.join(__dirname, "Unauthorized.ejs"));
+    }
+  }, async (req, res) => {
   const { date } = req.body;
   console.log(date);
   const news = await News.find({ createdAt: date });
