@@ -72,11 +72,11 @@
             <h3 style="text-align: center;">Admin Dashboard</h3>
             <h4 style="text-align: center;">Add News</h4>
             <form class="inner" method="post" action="/post-news">
-                <input type="text" placeholder="Enter Title" name="title">
-                <input type="text" placeholder="Enter Image URL" name="imageUrl">
-                <textarea name="news" placeholder="Enter News" id="" cols="30" rows="10"></textarea>
+                <input type="text" required placeholder="Enter Title" name="title">
+                <input type="text" required placeholder="Enter Image URL" name="imageUrl">
+                <textarea name="news" required placeholder="Enter News" id="" cols="30" rows="10"></textarea>
                 <p style="font-size: 14px;margin: 0;">Select Category</p>
-                <select name="category" id="category">
+                <select name="category" required id="category">
                     <option value="political">Political</option>
                     <option value="finance">Finance</option>
                     <option value="sports">Sports</option>
