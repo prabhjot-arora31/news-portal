@@ -32,7 +32,7 @@
 <% if(date != ""){ %>
     <br>
 <h3 style="text-align: center;">
-    <% date %>
+   Showing results for: <%= date %>
 </h3>
 <% } %>
             <h5 style="text-align: center;">
@@ -43,7 +43,7 @@
                     Select date
                 <form action="/home/news-by-date" method="post">
                     <input type="date" id="" name="date" style="padding: 0.25rem;">
-                    <button style="background-color: black; color: white; border: none; cursor: pointer; padding: 0.35rem;">Submit</button>
+                    <button style="background-color: black; color: white; border: none; cursor: pointer; padding: 0.35rem;">Filter</button>
                 </form>
             </h5>
         </div>
@@ -66,8 +66,9 @@
         </div>
     </div>  
 <% }else{ %>
+       <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
         <div class="main2">
-            <h3 style="text-align: center;">Admin Access</h3>
+            <h3 style="text-align: center;">Admin Dashboard</h3>
             <h4 style="text-align: center;">Add News</h4>
             <form class="inner" method="post" action="/post-news">
                 <input type="text" placeholder="Enter Title" name="title">
@@ -83,18 +84,46 @@
                 <button style="background-color: black; color: white; padding: 0.54rem 1.2rem; border: none;cursor: pointer;">Add</button>
             </form>
           </div>
-          <br>
-          <br>
-          <div class="big-main">
+         
+          <div class="big-main" style="margin: 0;">
+            <% if(showTabs){ %>
             <div class="tabs">
                 <h3 onclick="getData('/home/political' , this.id)" id="p">Political</h3>
                 <h3 onclick="getData('/home/finance' , this.id)" id="f">Finance</h3>
                 <h3 onclick="getData('/home/sports' , this.id)" id="s">Sports</h3>
                 <h3 onclick="getData('/home/entertainment' , this.id)" id="e">Entertainment</h3>
             </div>
+            <% }%>
+            <div style="padding: 0.7rem;">
+                <% if(!showTabs){ %>
+                    <a href="/home" style="background-color: black; color: white; padding:0.17rem 0.65rem; text-decoration: none;">Main Menu</a>
+    <% }%>
+    <% if(date != ""){ %>
+        <br>
+    <h3 style="text-align: center;">
+        Showing results for: <%= date %>
+
+    </h3>
+    <% } %>
+                <h5 style="text-align: center;">
+                    <% if(showTabs){ %>
+                        Or 
+                        <% } %>
+                        <br>
+                        Select date
+                    <form action="/home/news-by-date" method="post">
+                        <input type="date" id="" name="date" style="padding: 0.25rem;">
+                        <button style="background-color: black; color: white; border: none; cursor: pointer; padding: 0.35rem;">Filter</button>
+                    </form>
+                </h5>
+            </div>
             <div class="main" id="main">
-                <% for(var i = 0 ; i < data.length ; i++){ %>
-                    <div style="padding: 0.7rem; background-color: lightgray; cursor: pointer;" class="box" id="box">
+                <%
+                if(data.length <= 0){%>
+                    <h3 style="margin: 20px auto;">No Data Found</h3>
+                <%}else{
+                for(var i = 0 ; i < data.length ; i++){ %>
+                    <div style="padding: 0.7rem; background-color: lightgray; cursor: pointer;" class="box" id="box" onclick="clicking(`<%= data[i].news %>`)">
                        <h3 style="text-align: center;" id="heading">
                            <%= data[i].title %>
                        </h3>
@@ -103,9 +132,10 @@
                        </div>
                        <p style="font-size: 11.2px;" id="time">Updated: <%= data[i].createdAt %></p>
                     </div>
-                <% } %>
+                <% }} %>
             </div>
-        </div>  
+        </div> 
+       </div> 
         <% } %>
 <script>
     const box = document.getElementsByClassName('box');

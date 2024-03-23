@@ -33,15 +33,31 @@ app.get(
 app.get(
   "/login",
   (req, res, next) => {
-    if (req.session && req.session.user)
-      //   res
-      //     .status(200)
-      //     .render(path.join(__dirname, "Home.ejs"), { email: req.session.user });
-      res.redirect("/home");
+    if (req.session && req.session.user) res.redirect("/home");
+    else next();
+  },
+  (req, res) => {
+    res.render(path.join(__dirname, "userOrAdminLogin.ejs"));
+  }
+);
+app.get(
+  "/user-login",
+  (req, res, next) => {
+    if (req.session && req.session.user) res.redirect("/home");
     else next();
   },
   (req, res) => {
     res.render(path.join(__dirname, "login.ejs"));
+  }
+);
+app.get(
+  "/admin-login",
+  (req, res, next) => {
+    if (req.session && req.session.user) res.redirect("/home");
+    else next();
+  },
+  (req, res) => {
+    res.render(path.join(__dirname, "admin-login.ejs"));
   }
 );
 app.post("/register", async (req, res) => {
@@ -108,31 +124,51 @@ const categoryMap = {
   sports: "sports",
   entertainment: "entertainment",
 };
-app.get("/home", async (req, res) => {
-  const news = await News.find({ category: "political" });
-  res.render(path.join(__dirname, "home.ejs"), {
-    email: req.session.user,
-    data: news,
-    showTabs: true,
-    date: "",
-  });
-});
-// app.get('/home',)
-app.get("/home/:category", async (req, res) => {
-  const category = req.params.category;
-  if (category in categoryMap) {
-    const news = await News.find({ category: categoryMap[category] });
-    console.log(news);
-    res.json({
+app.get(
+  "/home",
+  (req, res, next) => {
+    if (req.session && req.session.user) {
+      next();
+    } else {
+      res.render(path.join(__dirname, "Unauthorized.ejs"));
+    }
+  },
+  async (req, res) => {
+    const news = await News.find({ category: "political" });
+    res.render(path.join(__dirname, "home.ejs"), {
       email: req.session.user,
       data: news,
       showTabs: true,
       date: "",
     });
-  } else {
-    res.status(404).send("Category not found");
   }
-});
+);
+// app.get('/home',)
+app.get(
+  "/home/:category",
+  (req, res, next) => {
+    if (req.session && req.session.user) {
+      next();
+    } else {
+      res.render(path.join(__dirname, "Unauthorized.ejs"));
+    }
+  },
+  async (req, res) => {
+    const category = req.params.category;
+    if (category in categoryMap) {
+      const news = await News.find({ category: categoryMap[category] });
+      console.log(news);
+      res.json({
+        email: req.session.user,
+        data: news,
+        showTabs: true,
+        date: "",
+      });
+    } else {
+      res.status(404).send("Category not found");
+    }
+  }
+);
 app.post("/home/news-by-date", async (req, res) => {
   const { date } = req.body;
   console.log(date);
