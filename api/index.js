@@ -135,8 +135,10 @@ app.get(
   },
   async (req, res) => {
     const news = await News.find({ category: "political" });
+    const nameData = await User.findOne({email:req.session.user});
     res.render(path.join(__dirname, "home.ejs"), {
       email: req.session.user,
+      name:nameData.name,
       data: news,
       showTabs: true,
       date: "",
