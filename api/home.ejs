@@ -227,6 +227,15 @@
     div.style.cursor = 'pointer';
     div.style.maxHeight = '410px'
     const h3 = document.createElement("h3");
+    const h3_2 = document.createElement("h3");
+    // <h6 style="background-color: white; color: gray; padding: 0.32rem; border-radius: 0.6rem;width: 60px;text-align: center; "><%= data[i].category %></h6>
+h3_2.style.backgroundColor = 'white';
+h3_2.style.color = 'gray';
+h3_2.style.padding = '0.32rem';
+h3_2.style.borderRadius = '0.6rem';
+h3_2.style.width = '90px';
+h3_2.style.textAlign = 'center';
+h3_2.innerText = item.category;
     h3.style.textAlign = 'center';
     h3.innerHTML = `${item.title}`;
     const imgDiv = document.createElement("div");
@@ -241,6 +250,7 @@
     p.innerHTML = `Updated: ${item.createdAt}`;
     imgDiv.appendChild(img);
     div.appendChild(h3);
+    div.appendChild(h3_2)
     div.appendChild(imgDiv);
     div.appendChild(p);
     div.id = 'box';
